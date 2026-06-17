@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events | Advocate for Autism</title>
+    <style>
+        /* Global & Standardized Layout Rules */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #fcfcfd; color: #2d3748; line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
+        .main-content { flex: 1; }
+        
+        /* Fixed Standardized Header - Locked Layout Box Grid */
+        header { background-color: #ffffff; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03); position: sticky; top: 0; z-index: 1000; height: 80px; display: flex; align-items: center; width: 100%; }
+        .nav-container { max-width: 1200px; width: 100%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; height: 100%; }
+        
+        /* Logo Layout Rules - Updated with support for an inline image placeholder */
+        .logo { display: flex; align-items: center; gap: 12px; font-size: 1.3rem; font-weight: 700; color: #1a2e40; text-decoration: none; letter-spacing: -0.3px; white-space: nowrap; }
+        .logo img { height: 42px; width: auto; object-fit: contain; }
+        
+        /* Navigation Links Layout Fixes to Prevent Text Shift */
+        .nav-links { display: flex; list-style: none; gap: 5px; align-items: center; height: 100%; }
+        .nav-links li { display: flex; align-items: center; height: 100%; justify-content: center; }
+        .nav-links a { text-decoration: none; color: #4a5568; font-weight: 500; font-size: 1rem; position: relative; padding: 10px 16px; transition: color 0.2s ease; white-space: nowrap; display: inline-block; text-align: center; }
+        
+        /* Active & Hover States using Translate to Stop Layout Shifts */
+        .nav-links a::after { content: ''; position: absolute; width: calc(100% - 32px); height: 2px; bottom: 4px; left: 16px; background-color: #0d9488; transform: scaleX(0); transform-origin: bottom right; transition: transform 0.2s ease-out; }
+        .nav-links a:hover::after, .nav-links .active::after { transform: scaleX(1); transform-origin: bottom left; }
+        .nav-links a:hover, .nav-links .active { color: #0d9488 !important; font-weight: 500; }
+        
+        /* Nav Button Micro-Interaction */
+        .nav-cta { background-color: #0d9488; color: white !important; padding: 8px 20px !important; border-radius: 20px; font-weight: 600 !important; margin-left: 15px; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.2s ease, box-shadow 0.2s ease !important; }
+        .nav-cta::after { display: none !important; }
+        .nav-cta:hover { background-color: #0f766e; transform: scale(1.05); box-shadow: 0 4px 10px rgba(13, 148, 136, 0.2); }
+        .nav-cta:active { transform: scale(0.98); }
+        
+        /* Page Content Styles */
+        .page-header { background: #1a2e40; color: white; padding: 60px 20px; text-align: center; }
+        .events-container { max-width: 900px; margin: 60px auto; padding: 0 20px; }
+        .event-list { display: flex; flex-direction: column; gap: 25px; margin-top: 40px; }
+        
+        .event-row { display: flex; background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); overflow: hidden; border: 1px solid #e2e8f0; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+        .event-row:hover { transform: translateX(5px); box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
+        
+        .event-date { background: #0d9488; color: white; padding: 30px; display: flex; flex-direction: column; justify-content: center; align-items: center; min-width: 120px; text-align: center; transition: background-color 0.25s ease; }
+        .event-row:hover .event-date { background-color: #1a2e40; }
+        .event-date .day { font-size: 1.8rem; font-weight: 700; }
+        .event-date .month { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .event-details { padding: 25px; flex-grow: 1; }
+        .event-details h3 { color: #1a2e40; margin-bottom: 5px; }
+        .event-time { color: #64748b; font-size: 0.9rem; margin-bottom: 10px; font-weight: 600; }
+        
+        /* Standardized Footer */
+        footer { background-color: #1a2e40; color: #94a3b8; text-align: center; padding: 40px 20px; font-size: 0.95rem; border-top: 1px solid #2c4a6f; width: 100%; height: 100px; display: flex; align-items: center; justify-content: center; }
+        
+        /* Responsive Media Adjustments */
+        @media (max-width: 768px) { header { height: auto; padding: 15px 0; } .nav-container { flex-direction: column; gap: 15px; } .nav-links { height: auto; flex-direction: column; gap: 10px; } .nav-links li { height: auto; } .nav-cta { margin-left: 0; } }
+        @media (max-width: 600px) { .event-row { flex-direction: column; } .event-date { padding: 15px; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Advocate for Autism Logo">
+                <span>Advocate for Autism</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="partnerships.html">Our Partnerships</a></li>
+                <li><a href="events.html" class="active">Events</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="get-involved.html" class="nav-cta">Get Involved</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="page-header">
+            <h1>Upcoming Community Events</h1>
+        </div>
+
+        <section class="events-container">
+            <h2>Join Our Local Gatherings</h2>
+            <p>Our advocacy actions are live and open to all. Check back often for seminars, family workshops, and casual sensory-friendly meetups.</p>
+            
+            <div class="event-list">
+                <div class="event-row">
+                    <div class="event-date">
+                        <span class="day">12</span>
+                        <span class="month">July</span>
+                    </div>
+                    <div class="event-details">
+                        <h3>Community Sensory Awareness Seminar</h3>
+                        <div class="event-time">🕒 2:00 PM - 4:30 PM | Town Community Center</div>
+                        <p>An interactive discussion outlining standard autism patterns and practical sensory support strategies for businesses and neighborhoods.</p>
+                    </div>
+                </div>
+
+                <div class="event-row">
+                    <div class="event-date">
+                        <span class="day">28</span>
+                        <span class="month">Aug</span>
+                    </div>
+                    <div class="event-details">
+                        <h3>Inclusive Family Networking Meetup</h3>
+                        <div class="event-time">🕒 11:00 AM - 1:30 PM | Central Public Park</div>
+                        <p>A completely casual, safe afternoon structure where local families can connect, share stories, and build neighborhood support networks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Advocate for Autism. Working towards community understanding.</p>
+    </footer>
+
+</body>
+</html>

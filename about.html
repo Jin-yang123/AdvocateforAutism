@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Advocate for Autism</title>
+    <style>
+        /* Global & Standardized Layout Rules */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #fcfcfd; color: #2d3748; line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
+        .main-content { flex: 1; }
+        
+        /* Fixed Standardized Header - Locked Layout Box Grid */
+        header { background-color: #ffffff; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03); position: sticky; top: 0; z-index: 1000; height: 80px; display: flex; align-items: center; width: 100%; }
+        .nav-container { max-width: 1200px; width: 100%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; height: 100%; }
+        
+        /* Logo Layout Rules - Updated with support for an inline image placeholder */
+        .logo { display: flex; align-items: center; gap: 12px; font-size: 1.3rem; font-weight: 700; color: #1a2e40; text-decoration: none; letter-spacing: -0.3px; white-space: nowrap; }
+        .logo img { height: 42px; width: auto; object-fit: contain; }
+        
+        /* Navigation Links Layout Fixes to Prevent Text Shift */
+        .nav-links { display: flex; list-style: none; gap: 5px; align-items: center; height: 100%; }
+        .nav-links li { display: flex; align-items: center; height: 100%; justify-content: center; }
+        .nav-links a { text-decoration: none; color: #4a5568; font-weight: 500; font-size: 1rem; position: relative; padding: 10px 16px; transition: color 0.2s ease; white-space: nowrap; display: inline-block; text-align: center; }
+        
+        /* Active & Hover States using Translate to Stop Layout Shifts */
+        .nav-links a::after { content: ''; position: absolute; width: calc(100% - 32px); height: 2px; bottom: 4px; left: 16px; background-color: #0d9488; transform: scaleX(0); transform-origin: bottom right; transition: transform 0.2s ease-out; }
+        .nav-links a:hover::after, .nav-links .active::after { transform: scaleX(1); transform-origin: bottom left; }
+        .nav-links a:hover, .nav-links .active { color: #0d9488 !important; font-weight: 500; }
+        
+        /* Nav Button Micro-Interaction */
+        .nav-cta { background-color: #0d9488; color: white !important; padding: 8px 20px !important; border-radius: 20px; font-weight: 600 !important; margin-left: 15px; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.2s ease, box-shadow 0.2s ease !important; }
+        .nav-cta::after { display: none !important; }
+        .nav-cta:hover { background-color: #0f766e; transform: scale(1.05); box-shadow: 0 4px 10px rgba(13, 148, 136, 0.2); }
+        .nav-cta:active { transform: scale(0.98); }
+        
+        /* Page Content Styles */
+        .page-header { background: #1a2e40; color: white; padding: 60px 20px; text-align: center; }
+        .content-container { max-width: 800px; margin: 60px auto 40px auto; padding: 0 20px; }
+        .content-container h2 { color: #1a2e40; margin-bottom: 20px; }
+        .content-container p { margin-bottom: 20px; color: #4a5568; font-size: 1.1rem; }
+        
+        /* Team Section Layout */
+        .team-section { background-color: #f1f5f9; padding: 70px 20px; }
+        .team-container { max-width: 1200px; margin: 0 auto; text-align: center; }
+        .team-container h2 { font-size: 2.2rem; color: #1a2e40; margin-bottom: 10px; }
+        .team-subtitle { color: #64748b; margin-bottom: 50px; font-size: 1.1rem; }
+        
+        /* Tiered Flexible Cards Design */
+        .team-tier { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; margin-bottom: 35px; }
+        .team-card { background: white; padding: 30px 24px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); text-align: left; border-bottom: 0px solid #0d9488; transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; }
+        .team-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-bottom: 3px solid #0d9488; }
+        
+        /* Individual Avatar Layout rules */
+        .avatar-container { width: 70px; height: 70px; margin-bottom: 15px; border-radius: 50%; overflow: hidden; background: #e2e8f0; display: flex; align-items: center; justify-content: center; border: 2px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .avatar-container img { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* Initials styling fallback block if avatar img doesn't load */
+        .avatar-initials { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 1.3rem; background: linear-gradient(135deg, #1a2e40 0%, #334e68 100%); }
+        .tier-1 .avatar-initials { background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%); }
+        
+        /* Strategic Responsive Width Rules for 8 Members */
+        .tier-1 .team-card, .tier-2 .team-card { width: calc(50% - 13px); min-width: 300px; max-width: 450px; }
+        .tier-3 .team-card { width: calc(25% - 19px); min-width: 250px; }
+        
+        .team-card h3 { color: #1a2e40; font-size: 1.25rem; margin-bottom: 4px; }
+        .team-card .role { color: #0d9488; font-weight: 600; font-size: 0.95rem; margin-bottom: 12px; display: inline-block; }
+        
+        /* Paragraph-Style Member Description Styling */
+        .team-card .member-desc { color: #4a5568; font-size: 0.9rem; line-height: 1.5; margin-top: 4px; }
+        
+        /* Standardized Footer */
+        footer { background-color: #1a2e40; color: #94a3b8; text-align: center; padding: 40px 20px; font-size: 0.95rem; border-top: 1px solid #2c4a6f; width: 100%; height: 100px; display: flex; align-items: center; justify-content: center; }
+        
+        /* Responsive Media Adjustments */
+        @media (max-width: 1100px) { .tier-3 .team-card { width: calc(50% - 13px); max-width: 450px; } }
+        @media (max-width: 768px) { header { height: auto; padding: 15px 0; } .nav-container { flex-direction: column; gap: 15px; } .nav-links { height: auto; flex-direction: column; gap: 10px; } .nav-links li { height: auto; } .nav-cta { margin-left: 0; } .tier-1 .team-card, .tier-2 .team-card, .tier-3 .team-card { width: 100%; max-width: 100%; } }
+        
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Advocate for Autism Logo">
+                <span>Advocate for Autism</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About Us</a></li>
+                <li><a href="partnerships.html">Our Partnerships</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="get-involved.html" class="nav-cta">Get Involved</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="page-header">
+            <h1>About Our Society</h1>
+        </div>
+
+        <section class="content-container">
+            <h2>Who We Are</h2>
+            <p>Advocate for Autism was founded on the belief that real change starts with structural advocacy and empathetic community action. We work tirelessly to remove societal stigmas, offering a safe space where individuals on the autism spectrum are recognized, respected, and fully supported.</p>
+            <p>Through our localized educational frameworks, regular awareness programs, and direct public engagement, we hope to establish sustainable support grids across neighborhoods and campuses alike.</p>
+        </section>
+
+        <section class="team-section">
+            <div class="team-container">
+                <h2>Our Executive Committee</h2>
+                <p class="team-subtitle">The dedicated team directing strategies, operations, and programs for our NGO.</p>
+
+                <div class="team-tier tier-1">
+                    <div class="team-card">
+                        <div class="avatar-container">
+                            <img src="" alt="Jin Yang Profile">
+                            <div class="avatar-initials">JY</div>
+                        </div>
+                        <h3>Jin Yang</h3>
+                        <span class="role">Executive Director (President)</span>
+                        <p class="member-desc">description for jin yang</p>
+                    </div>
+                    <div class="team-card">
+                        <div class="avatar-container">
+                            <img src="" alt="Daniel Profile">
+                            <div class="avatar-initials">D</div>
+                        </div>
+                        <h3>Daniel</h3>
+                        <span class="role">Vice President (Operations Lead)</span>
+                        <p class="member-desc">description for daniel</p>
+                    </div>
+                </div>
+
+                <div class="team-tier tier-2">
+                    <div class="team-card">
+                        <div class="avatar-container">
+                            <img src="" alt="Ayleen Profile">
+                            <div class="avatar-initials">A</div>
+                        </div>
+                        <h3>Ayleen</h3>
+                        <span class="role">Secretary (Administration & Documentation)</span>
+                        <p class="member-desc">description for ayleen</p>
+                    </div>
+                    <div class="team-card">
+                        <div class="avatar-container">
+                            <img src="" alt="Owen Profile">
+                            <div class="avatar-initials">O</div>
+                        </div>
+                        <h3>Owen</h3>
+                        <span class="role">Treasurer (Finance Manager)</span>
+                        <p class="member-desc">description for owen</p>
+                    </div>
+                </div>
+
+                <div class="team-tier tier-3">
+                    <div class="team-card">
+                        <div class="avatar-container">
+                            <img src="" alt="Jayden Profile">
+                            <div class="avatar-initials">J</div>
+                        </div>
+                        <h3>Jayden</h3>
+                        <span class="role">Outreach & Partnerships Director</span>
+                        <p class="member-desc">description for jayden</p>
+                    </div>
+                    <div class="team-card">
+                        <div class="avatar-container">
+                            <img src="" alt="Danya Profile">
+                            <div class="avatar-initials">D</div>
+                        </div>
+                        <h3>Danya</h3>
+                        <span class="role">Marketing & Social Media Director</span>
+                        <p class="member-desc">description for danya</p>
+                    </div>
+                    <div class="team-card">
+                        <div class="avatar-container">
+                            <img src="" alt="Amber Profile">
+                            <div class="avatar-initials">AM</div>
+                        </div>
+                        <h3>Amber</h3>
+                        <span class="role">Deputy Event Director</span>
+                        <p class="member-desc">description for amber</p>
+                    </div>
+                    <div class="team-card">
+                        <div class="avatar-container">
+                            <img src="" alt="Abby Profile">
+                            <div class="avatar-initials">AB</div>
+                        </div>
+                        <h3>Abby</h3>
+                        <span class="role">Deputy Social Media Director</span>
+                        <p class="member-desc">description for abby</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Advocate for Autism. Working towards community understanding.</p>
+    </footer>
+
+</body>
+</html>
