@@ -14,7 +14,7 @@
         header { background-color: #ffffff; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03); position: sticky; top: 0; z-index: 1000; height: 80px; display: flex; align-items: center; width: 100%; }
         .nav-container { max-width: 1200px; width: 100%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; height: 100%; }
         
-        /* Logo Layout Rules - Updated with support for an inline image placeholder */
+        /* Logo Layout Rules */
         .logo { display: flex; align-items: center; gap: 12px; font-size: 1.3rem; font-weight: 700; color: #1a2e40; text-decoration: none; letter-spacing: -0.3px; white-space: nowrap; }
         .logo img { height: 42px; width: auto; object-fit: contain; }
         
@@ -51,31 +51,31 @@
         .team-card { background: white; padding: 30px 24px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); text-align: left; border-bottom: 0px solid #0d9488; transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; }
         .team-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-bottom: 3px solid #0d9488; }
         
-        /* Individual Avatar Layout rules */
-        .avatar-container { width: 70px; height: 70px; margin-bottom: 15px; border-radius: 50%; overflow: hidden; background: #e2e8f0; display: flex; align-items: center; justify-content: center; border: 2px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-        .avatar-container img { width: 100%; height: 100%; object-fit: cover; }
+        /* Individual Avatar Layout rules with Layered Z-Index Fix */
+        .avatar-container { position: relative; width: 70px; height: 70px; margin-bottom: 15px; border-radius: 50%; overflow: hidden; background: #e2e8f0; display: flex; align-items: center; justify-content: center; border: 2px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .avatar-container img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2; }
+        
+        /* Safe Image Hiding If Broken/Missing */
+        .avatar-container img[src=""], .avatar-container img:not([src]) { display: none; }
         
         /* Initials styling fallback block if avatar img doesn't load */
-        .avatar-initials { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 1.3rem; background: linear-gradient(135deg, #1a2e40 0%, #334e68 100%); }
+        .avatar-initials { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 1.3rem; background: linear-gradient(135deg, #1a2e40 0%, #334e68 100%); position: absolute; top: 0; left: 0; z-index: 1; }
         .tier-1 .avatar-initials { background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%); }
         
-        /* Strategic Responsive Width Rules for 8 Members */
+        /* Strategic Responsive Width Rules */
         .tier-1 .team-card, .tier-2 .team-card { width: calc(50% - 13px); min-width: 300px; max-width: 450px; }
-        .tier-3 .team-card { width: calc(25% - 19px); min-width: 250px; }
+        .tier-3 .team-card { width: calc(33.333% - 17px); min-width: 260px; max-width: 380px; }
         
         .team-card h3 { color: #1a2e40; font-size: 1.25rem; margin-bottom: 4px; }
         .team-card .role { color: #0d9488; font-weight: 600; font-size: 0.95rem; margin-bottom: 12px; display: inline-block; }
-        
-        /* Paragraph-Style Member Description Styling */
         .team-card .member-desc { color: #4a5568; font-size: 0.9rem; line-height: 1.5; margin-top: 4px; }
         
         /* Standardized Footer */
         footer { background-color: #1a2e40; color: #94a3b8; text-align: center; padding: 40px 20px; font-size: 0.95rem; border-top: 1px solid #2c4a6f; width: 100%; height: 100px; display: flex; align-items: center; justify-content: center; }
         
         /* Responsive Media Adjustments */
-        @media (max-width: 1100px) { .tier-3 .team-card { width: calc(50% - 13px); max-width: 450px; } }
+        @media (max-width: 968px) { .tier-3 .team-card { width: calc(50% - 13px); max-width: 450px; } }
         @media (max-width: 768px) { header { height: auto; padding: 15px 0; } .nav-container { flex-direction: column; gap: 15px; } .nav-links { height: auto; flex-direction: column; gap: 10px; } .nav-links li { height: auto; } .nav-cta { margin-left: 0; } .tier-1 .team-card, .tier-2 .team-card, .tier-3 .team-card { width: 100%; max-width: 100%; } }
-        
     </style>
 </head>
 <body>
@@ -113,10 +113,11 @@
                 <h2>Our Executive Committee</h2>
                 <p class="team-subtitle">The dedicated team directing strategies, operations, and programs for our NGO.</p>
 
+                <!-- Tier 1: President & VP -->
                 <div class="team-tier tier-1">
                     <div class="team-card">
                         <div class="avatar-container">
-                            <img src="" alt="Jin Yang Profile">
+                            <img src="images/jin-yang.jpg" alt="Jin Yang Profile">
                             <div class="avatar-initials">JY</div>
                         </div>
                         <h3>Jin Yang</h3>
@@ -125,7 +126,7 @@
                     </div>
                     <div class="team-card">
                         <div class="avatar-container">
-                            <img src="" alt="Daniel Profile">
+                            <img src="images/daniel.jpg" alt="Daniel Profile">
                             <div class="avatar-initials">D</div>
                         </div>
                         <h3>Daniel</h3>
@@ -134,10 +135,11 @@
                     </div>
                 </div>
 
+                <!-- Tier 2: Secretary & Treasurer -->
                 <div class="team-tier tier-2">
                     <div class="team-card">
                         <div class="avatar-container">
-                            <img src="" alt="Ayleen Profile">
+                            <img src="images/ayleen.jpg" alt="Ayleen Profile">
                             <div class="avatar-initials">A</div>
                         </div>
                         <h3>Ayleen</h3>
@@ -146,7 +148,7 @@
                     </div>
                     <div class="team-card">
                         <div class="avatar-container">
-                            <img src="" alt="Owen Profile">
+                            <img src="images/owen.jpg" alt="Owen Profile">
                             <div class="avatar-initials">O</div>
                         </div>
                         <h3>Owen</h3>
@@ -155,10 +157,11 @@
                     </div>
                 </div>
 
+                <!-- Tier 3: Directors & Deputies -->
                 <div class="team-tier tier-3">
                     <div class="team-card">
                         <div class="avatar-container">
-                            <img src="" alt="Jayden Profile">
+                            <img src="images/jayden.jpg" alt="Jayden Profile">
                             <div class="avatar-initials">J</div>
                         </div>
                         <h3>Jayden</h3>
@@ -167,16 +170,7 @@
                     </div>
                     <div class="team-card">
                         <div class="avatar-container">
-                            <img src="" alt="Danya Profile">
-                            <div class="avatar-initials">D</div>
-                        </div>
-                        <h3>Danya</h3>
-                        <span class="role">Marketing & Social Media Director</span>
-                        <p class="member-desc">description for danya</p>
-                    </div>
-                    <div class="team-card">
-                        <div class="avatar-container">
-                            <img src="" alt="Amber Profile">
+                            <img src="images/amber.jpg" alt="Amber Profile">
                             <div class="avatar-initials">AM</div>
                         </div>
                         <h3>Amber</h3>
@@ -185,7 +179,7 @@
                     </div>
                     <div class="team-card">
                         <div class="avatar-container">
-                            <img src="" alt="Abby Profile">
+                            <img src="images/abby.jpg" alt="Abby Profile">
                             <div class="avatar-initials">AB</div>
                         </div>
                         <h3>Abby</h3>
