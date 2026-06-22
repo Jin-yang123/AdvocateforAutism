@@ -8,13 +8,13 @@
         /* Global & Standardized Layout Rules */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #fcfcfd; color: #2d3748; line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
-        .main-content { flex: 1; }
+        .main-content { flex: 1; display: flex; flex-direction: column; }
         
         /* Fixed Standardized Header - Locked Layout Box Grid */
         header { background-color: #ffffff; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03); position: sticky; top: 0; z-index: 1000; height: 80px; display: flex; align-items: center; width: 100%; }
         .nav-container { max-width: 1200px; width: 100%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; height: 100%; }
         
-        /* Logo Layout Rules - Updated with support for an inline image placeholder */
+        /* Logo Layout Rules */
         .logo { display: flex; align-items: center; gap: 12px; font-size: 1.3rem; font-weight: 700; color: #1a2e40; text-decoration: none; letter-spacing: -0.3px; white-space: nowrap; }
         .logo img { height: 42px; width: auto; object-fit: contain; }
         
@@ -26,7 +26,7 @@
         /* Active & Hover States using Translate to Stop Layout Shifts */
         .nav-links a::after { content: ''; position: absolute; width: calc(100% - 32px); height: 2px; bottom: 4px; left: 16px; background-color: #0d9488; transform: scaleX(0); transform-origin: bottom right; transition: transform 0.2s ease-out; }
         .nav-links a:hover::after, .nav-links .active::after { transform: scaleX(1); transform-origin: bottom left; }
-        .nav-links a:hover, .nav-links .active { color: #0d9488 !important; font-weight: 500; } /* Locked font-weight at 500 */
+        .nav-links a:hover, .nav-links .active { color: #0d9488 !important; font-weight: 500; }
         
         /* Nav Button Micro-Interaction */
         .nav-cta { background-color: #0d9488; color: white !important; padding: 8px 20px !important; border-radius: 20px; font-weight: 600 !important; margin-left: 15px; transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.2s ease, box-shadow 0.2s ease !important; }
@@ -34,21 +34,45 @@
         .nav-cta:hover { background-color: #0f766e; transform: scale(1.05); box-shadow: 0 4px 10px rgba(13, 148, 136, 0.2); }
         .nav-cta:active { transform: scale(0.98); }
         
-        /* Page Content Styles */
+        /* Page Header Style */
         .page-header { background: #1a2e40; color: white; padding: 60px 20px; text-align: center; }
-        .resources-container { max-width: 1100px; margin: 60px auto; padding: 0 20px; }
-        .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 40px; }
-        
-        .resource-card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #e2e8f0; transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease, border-color 0.3s ease; }
-        .resource-card:hover { transform: translateY(-4px); box-shadow: 0 12px 20px rgba(0,0,0,0.05); border-color: #0d9488; }
-        .resource-card h3 { color: #1a2e40; margin-bottom: 10px; }
-        
-        .download-link { display: inline-block; margin-top: 15px; color: #0d9488; font-weight: 600; text-decoration: none; transition: transform 0.2s ease, color 0.2s ease; }
-        .resource-card:hover .download-link { color: #0f766e; transform: translateX(4px); }
+
+        /* Coming Soon Center Layout Section */
+        .coming-soon-section { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 80px 20px; }
+        .coming-soon-container { max-width: 600px; margin: 0 auto; }
+        .coming-soon-container h2 { font-size: 2.5rem; color: #1a2e40; margin-bottom: 15px; font-weight: 700; }
+        .coming-soon-container p { font-size: 1.2rem; color: #64748b; margin-bottom: 30px; }
+        .coming-soon-icon { font-size: 4rem; margin-bottom: 20px; display: inline-block; animation: pulse 2s infinite ease-in-out; }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
         
         /* Standardized Footer */
         footer { background-color: #1a2e40; color: #94a3b8; text-align: center; padding: 40px 20px; font-size: 0.95rem; border-top: 1px solid #2c4a6f; width: 100%; height: 100px; display: flex; align-items: center; justify-content: center; }
-        @media (max-width: 768px) { header { height: auto; padding: 15px 0; } .nav-container { flex-direction: column; gap: 15px; } .nav-links { height: auto; flex-direction: column; gap: 10px; } .nav-links li { height: auto; } .nav-cta { margin-left: 0; } }
+        
+        /* Responsive Media Adjustments */
+        @media (max-width: 768px) { 
+            /* Fixed Header Parameters for Flexible Layout Scaling */
+            header { height: auto; padding: 15px 0; position: relative; } 
+            .nav-container { flex-direction: column; gap: 12px; height: auto; } 
+            
+            /* Restructure Navigation Links to wrap horizontally cleanly */
+            .nav-links { height: auto; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 4px; } 
+            .nav-links li { height: auto; } 
+            .nav-links a { font-size: 0.88rem; padding: 6px 10px; }
+            .nav-links a::after { display: none; }
+            .nav-cta { margin-left: 0; margin-top: 4px; padding: 6px 14px !important; } 
+            
+            /* Responsive layout padding & font scaling */
+            .page-header { padding: 40px 15px; }
+            .page-header h1 { font-size: 1.8rem; }
+            .coming-soon-container h2 { font-size: 2rem; }
+            .coming-soon-container p { font-size: 1rem; }
+            footer { height: auto; padding: 30px 15px; }
+        }
     </style>
 </head>
 <body>
@@ -75,21 +99,11 @@
             <h1>Educational Resources</h1>
         </div>
 
-        <section class="resources-container">
-            <h2>Free Guides & Toolkits</h2>
-            <p>Access actionable reading materials built to expand structural understanding across your local community spaces.</p>
-            
-            <div class="resource-grid">
-                <div class="resource-card">
-                    <h3>Autism Awareness Handbook</h3>
-                    <p>A comprehensive introductory deep-dive outlining neurodivergent experiences, language preferences, and basic advocacy tips.</p>
-                    <a href="#" class="download-link" onclick="alert('PDF Download Link Goes Here!'); return false;">Download PDF Guide &rarr;</a>
-                </div>
-                <div class="resource-card">
-                    <h3>Sensory Workspace Checklist</h3>
-                    <p>A simple step-by-step audit for businesses looking to evaluate acoustic, layout, and visual environments for sensory comfort.</p>
-                    <a href="#" class="download-link" onclick="alert('PDF Download Link Goes Here!'); return false;">Download Checklist &rarr;</a>
-                </div>
+        <section class="coming-soon-section">
+            <div class="coming-soon-container">
+                <span class="coming-soon-icon">📚</span>
+                <h2>Coming Soon</h2>
+                <p>We are hard at work compiling downloadable playbooks, toolkits, and guides designed to foster inclusion. Check back shortly to access our free resource database!</p>
             </div>
         </section>
     </div>
