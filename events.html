@@ -14,7 +14,7 @@
         header { background-color: #ffffff; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03); position: sticky; top: 0; z-index: 1000; height: 80px; display: flex; align-items: center; width: 100%; }
         .nav-container { max-width: 1200px; width: 100%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; height: 100%; }
         
-        /* Logo Layout Rules - Updated with support for an inline image placeholder */
+        /* Logo Layout Rules */
         .logo { display: flex; align-items: center; gap: 12px; font-size: 1.3rem; font-weight: 700; color: #1a2e40; text-decoration: none; letter-spacing: -0.3px; white-space: nowrap; }
         .logo img { height: 42px; width: auto; object-fit: contain; }
         
@@ -23,7 +23,7 @@
         .nav-links li { display: flex; align-items: center; height: 100%; justify-content: center; }
         .nav-links a { text-decoration: none; color: #4a5568; font-weight: 500; font-size: 1rem; position: relative; padding: 10px 16px; transition: color 0.2s ease; white-space: nowrap; display: inline-block; text-align: center; }
         
-        /* Active & Hover States using Translate to Stop Layout Shifts */
+        /* Active & Hover States */
         .nav-links a::after { content: ''; position: absolute; width: calc(100% - 32px); height: 2px; bottom: 4px; left: 16px; background-color: #0d9488; transform: scaleX(0); transform-origin: bottom right; transition: transform 0.2s ease-out; }
         .nav-links a:hover::after, .nav-links .active::after { transform: scaleX(1); transform-origin: bottom left; }
         .nav-links a:hover, .nav-links .active { color: #0d9488 !important; font-weight: 500; }
@@ -36,26 +36,76 @@
         
         /* Page Content Styles */
         .page-header { background: #1a2e40; color: white; padding: 60px 20px; text-align: center; }
-        .events-container { max-width: 900px; margin: 60px auto; padding: 0 20px; }
-        .event-list { display: flex; flex-direction: column; gap: 25px; margin-top: 40px; }
+        .events-container { max-width: 950px; margin: 60px auto; padding: 0 20px; }
+        .events-container h2 { text-align: center; color: #1a2e40; }
+        .events-container > p { text-align: center; color: #64748b; margin-bottom: 40px; }
+        .event-list { display: flex; flex-direction: column; gap: 30px; }
         
-        .event-row { display: flex; background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); overflow: hidden; border: 1px solid #e2e8f0; transition: transform 0.25s ease, box-shadow 0.25s ease; }
-        .event-row:hover { transform: translateX(5px); box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
+        /* Dropdown Row Container */
+        .event-row { background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); overflow: hidden; border: 1px solid #e2e8f0; transition: box-shadow 0.25s ease; }
+        .event-row:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.06); }
         
-        .event-date { background: #0d9488; color: white; padding: 30px; display: flex; flex-direction: column; justify-content: center; align-items: center; min-width: 120px; text-align: center; transition: background-color 0.25s ease; }
+        /* Custom Summary Click Area with Extra Internal Spacing */
+        .event-summary { display: flex; cursor: pointer; list-style: none; outline: none; width: 100%; position: relative; }
+        .event-summary::-webkit-details-marker { display: none; }
+        
+        /* Updated Spacious & Flexible Date Layout to support Text Ranges */
+        .event-date { background: #0d9488; color: white; padding: 30px 24px; display: flex; flex-direction: column; justify-content: center; align-items: center; min-width: 160px; max-width: 160px; text-align: center; transition: background-color 0.25s ease; }
         .event-row:hover .event-date { background-color: #1a2e40; }
-        .event-date .day { font-size: 1.8rem; font-weight: 700; }
-        .event-date .month { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
-        .event-details { padding: 25px; flex-grow: 1; }
-        .event-details h3 { color: #1a2e40; margin-bottom: 5px; }
-        .event-time { color: #64748b; font-size: 0.9rem; margin-bottom: 10px; font-weight: 600; }
+        .event-date .day { font-size: 1.4rem; font-weight: 700; line-height: 1.2; white-space: normal; word-break: break-word; }
+        .event-date .month { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 6px; font-weight: 600; opacity: 0.9; }
+        
+        /* Added Content Spacing inside Details Panel */
+        .event-details { padding: 30px 60px 30px 35px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+        .event-details h3 { color: #1a2e40; font-size: 1.35rem; line-height: 1.3; }
+        .event-time { color: #64748b; font-size: 0.92rem; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+        
+        /* Dropdown Arrow Indicator */
+        .dropdown-arrow { position: absolute; right: 30px; top: 50%; transform: translateY(-50%); color: #a0aec0; font-size: 0.85rem; transition: transform 0.25s ease; }
+        .event-row[open] .dropdown-arrow { transform: translateY(-50%) rotate(180deg); color: #0d9488; }
+        
+        /* Hidden Dropdown Body Content with Clean Left Align Offset */
+        .event-description { padding: 25px 35px 30px 195px; color: #4a5568; font-size: 1rem; border-top: 1px dashed #edf2f7; background-color: #fafbfe; line-height: 1.7; }
         
         /* Standardized Footer */
         footer { background-color: #1a2e40; color: #94a3b8; text-align: center; padding: 40px 20px; font-size: 0.95rem; border-top: 1px solid #2c4a6f; width: 100%; height: 100px; display: flex; align-items: center; justify-content: center; }
         
         /* Responsive Media Adjustments */
-        @media (max-width: 768px) { header { height: auto; padding: 15px 0; } .nav-container { flex-direction: column; gap: 15px; } .nav-links { height: auto; flex-direction: column; gap: 10px; } .nav-links li { height: auto; } .nav-cta { margin-left: 0; } }
-        @media (max-width: 600px) { .event-row { flex-direction: column; } .event-date { padding: 15px; } }
+        @media (max-width: 768px) { 
+            /* Fixed Header Mobile Rules */
+            header { height: auto; padding: 15px 0; position: relative; } 
+            .nav-container { flex-direction: column; gap: 12px; height: auto; } 
+            
+            /* Horizontal row wrap setup for links */
+            .nav-links { height: auto; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 4px; } 
+            .nav-links li { height: auto; } 
+            .nav-links a { font-size: 0.88rem; padding: 6px 10px; }
+            .nav-links a::after { display: none; }
+            .nav-cta { margin-left: 0; margin-top: 4px; padding: 6px 14px !important; } 
+            
+            /* Spacing adjustments */
+            .page-header { padding: 40px 15px; }
+            .page-header h1 { font-size: 1.8rem; }
+            .events-container { margin: 40px auto; }
+            
+            /* Dropdown dynamic adjustments for medium width */
+            .event-description { padding-left: 35px; }
+            footer { height: auto; padding: 30px 15px; }
+        }
+        
+        @media (max-width: 600px) { 
+            /* Collapse individual event rows neatly into mobile responsive stacked cards */
+            .event-summary { flex-direction: column; } 
+            .event-date { padding: 15px; width: 100%; min-width: 100%; max-width: 100%; flex-direction: row; gap: 8px; justify-content: center; }
+            .event-date .day { font-size: 1.3rem; }
+            .event-date .month { font-size: 1.3rem; margin-top: 0; text-transform: none; letter-spacing: 0; }
+            .event-date .month::before { content: "- "; } /* Neat automatic spacer dash on mobile layout formats */
+            
+            .event-details { padding: 25px 20px; }
+            .dropdown-arrow { top: 32px; transform: none; right: 20px; }
+            .event-row[open] .dropdown-arrow { transform: rotate(180deg); }
+            .event-description { padding: 20px; }
+        }
     </style>
 </head>
 <body>
@@ -84,32 +134,44 @@
 
         <section class="events-container">
             <h2>Join Our Local Gatherings</h2>
-            <p>Our advocacy actions are live and open to all. Check back often for seminars, family workshops, and casual sensory-friendly meetups.</p>
+            <p>Our advocacy actions are live and open to all. Click any event panel below to view more details and descriptions.</p>
             
             <div class="event-list">
-                <div class="event-row">
-                    <div class="event-date">
-                        <span class="day">12</span>
-                        <span class="month">July</span>
-                    </div>
-                    <div class="event-details">
-                        <h3>Community Sensory Awareness Seminar</h3>
-                        <div class="event-time">🕒 2:00 PM - 4:30 PM | Town Community Center</div>
+                <!-- Dropdown Event Card 1 (Multi-day date range configuration) -->
+                <details class="event-row">
+                    <summary class="event-summary">
+                        <div class="event-date">
+                            <span class="day">12 - 14</span>
+                            <span class="month">July</span>
+                        </div>
+                        <div class="event-details">
+                            <h3>Community Sensory Awareness Seminar</h3>
+                            <div class="event-time">🕒 2:00 PM - 4:30 PM | Town Community Center</div>
+                        </div>
+                        <span class="dropdown-arrow">▼</span>
+                    </summary>
+                    <div class="event-description">
                         <p>An interactive discussion outlining standard autism patterns and practical sensory support strategies for businesses and neighborhoods.</p>
                     </div>
-                </div>
+                </details>
 
-                <div class="event-row">
-                    <div class="event-date">
-                        <span class="day">28</span>
-                        <span class="month">Aug</span>
-                    </div>
-                    <div class="event-details">
-                        <h3>Inclusive Family Networking Meetup</h3>
-                        <div class="event-time">🕒 11:00 AM - 1:30 PM | Central Public Park</div>
+                <!-- Dropdown Event Card 2 (Standard date structure) -->
+                <details class="event-row">
+                    <summary class="event-summary">
+                        <div class="event-date">
+                            <span class="day">28</span>
+                            <span class="month">Aug</span>
+                        </div>
+                        <div class="event-details">
+                            <h3>Inclusive Family Networking Meetup</h3>
+                            <div class="event-time">🕒 11:00 AM - 1:30 PM | Central Public Park</div>
+                        </div>
+                        <span class="dropdown-arrow">▼</span>
+                    </summary>
+                    <div class="event-description">
                         <p>A completely casual, safe afternoon structure where local families can connect, share stories, and build neighborhood support networks.</p>
                     </div>
-                </div>
+                </details>
             </div>
         </section>
     </div>
