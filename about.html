@@ -74,8 +74,36 @@
         footer { background-color: #1a2e40; color: #94a3b8; text-align: center; padding: 40px 20px; font-size: 0.95rem; border-top: 1px solid #2c4a6f; width: 100%; height: 100px; display: flex; align-items: center; justify-content: center; }
         
         /* Responsive Media Adjustments */
-        @media (max-width: 968px) { .tier-3 .team-card { width: calc(50% - 13px); max-width: 450px; } }
-        @media (max-width: 768px) { header { height: auto; padding: 15px 0; } .nav-container { flex-direction: column; gap: 15px; } .nav-links { height: auto; flex-direction: column; gap: 10px; } .nav-links li { height: auto; } .nav-cta { margin-left: 0; } .tier-1 .team-card, .tier-2 .team-card, .tier-3 .team-card { width: 100%; max-width: 100%; } }
+        @media (max-width: 968px) { 
+            .tier-3 .team-card { width: calc(50% - 13px); max-width: 450px; } 
+        }
+        
+        @media (max-width: 768px) { 
+            /* Fix 1: Remove the locked 80px box on mobile so it can adapt */
+            header { height: auto; padding: 15px 0; position: relative; } 
+            .nav-container { flex-direction: column; gap: 12px; height: auto; } 
+            
+            /* Fix 2: Keep links row-based but wrap neatly instead of stacking vertically like a giant list */
+            .nav-links { height: auto; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 4px; } 
+            .nav-links li { height: auto; } 
+            .nav-links a { font-size: 0.88rem; padding: 6px 10px; }
+            .nav-links a::after { display: none; } /* Clear underline movement bugs on mobile taps */
+            
+            /* Fix 3: Center button spacing on phone screens */
+            .nav-cta { margin-left: 0; margin-top: 4px; padding: 6px 14px !important; } 
+            
+            /* Fix 4: Scale typography down so it fits smaller viewports beautifully */
+            .page-header { padding: 40px 15px; }
+            .page-header h1 { font-size: 1.8rem; }
+            .content-container { margin: 30px auto; }
+            .team-section { padding: 40px 15px; }
+            .team-container h2 { font-size: 1.8rem; }
+            .team-subtitle { margin-bottom: 30px; font-size: 1rem; }
+            
+            /* Fix 5: Make cards expand to comfortable full phone size width */
+            .tier-1 .team-card, .tier-2 .team-card, .tier-3 .team-card { width: 100%; max-width: 100%; min-width: 100%; } 
+            footer { height: auto; padding: 30px 15px; }
+        }
     </style>
 </head>
 <body>
@@ -175,7 +203,7 @@
                         </div>
                         <h3>Amber</h3>
                         <span class="role">Deputy Event Director</span>
-                        <p class="member-desc">Hi I’m Amber and I’m eager to learn about how people think and behave in the way they do. I also enjoy dancing and eating Dubai chewy cookies</p>
+                        <p class="member-desc">Hi I’m Amber and I’m eager to learn about how people think and behave in the way they do. I also enjoy dancing and eating Dubai chewy cookies.</p>
                     </div>
                     <div class="team-card">
                         <div class="avatar-container">
