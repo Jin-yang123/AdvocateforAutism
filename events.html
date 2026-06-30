@@ -45,17 +45,17 @@
         .event-row { background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); overflow: hidden; border: 1px solid #e2e8f0; transition: box-shadow 0.25s ease; }
         .event-row:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.06); }
         
-        /* Custom Summary Click Area with Extra Internal Spacing */
+        /* Custom Summary Click Area */
         .event-summary { display: flex; cursor: pointer; list-style: none; outline: none; width: 100%; position: relative; }
         .event-summary::-webkit-details-marker { display: none; }
         
-        /* Updated Spacious & Flexible Date Layout to support Text Ranges */
+        /* Date Block */
         .event-date { background: #0d9488; color: white; padding: 30px 24px; display: flex; flex-direction: column; justify-content: center; align-items: center; min-width: 160px; max-width: 160px; text-align: center; transition: background-color 0.25s ease; }
         .event-row:hover .event-date { background-color: #1a2e40; }
-        .event-date .day { font-size: 1.4rem; font-weight: 700; line-height: 1.2; white-space: normal; word-break: break-word; }
-        .event-date .month { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 6px; font-weight: 600; opacity: 0.9; }
+        .event-date .day { font-size: 1.3rem; font-weight: 700; line-height: 1.2; white-space: normal; word-break: break-word; }
+        .event-date .month { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 6px; font-weight: 600; opacity: 0.9; }
         
-        /* Added Content Spacing inside Details Panel */
+        /* Panel Heading Text blocks */
         .event-details { padding: 30px 60px 30px 35px; flex-grow: 1; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
         .event-details h3 { color: #1a2e40; font-size: 1.35rem; line-height: 1.3; }
         .event-time { color: #64748b; font-size: 0.92rem; font-weight: 600; display: flex; align-items: center; gap: 6px; }
@@ -64,42 +64,44 @@
         .dropdown-arrow { position: absolute; right: 30px; top: 50%; transform: translateY(-50%); color: #a0aec0; font-size: 0.85rem; transition: transform 0.25s ease; }
         .event-row[open] .dropdown-arrow { transform: translateY(-50%) rotate(180deg); color: #0d9488; }
         
-        /* Hidden Dropdown Body Content with Clean Left Align Offset */
-        .event-description { padding: 25px 35px 30px 195px; color: #4a5568; font-size: 1rem; border-top: 1px dashed #edf2f7; background-color: #fafbfe; line-height: 1.7; }
+        /* Dropdown Inner Formatting Body Layout */
+        .event-description { padding: 35px 35px 35px 195px; color: #4a5568; font-size: 1rem; border-top: 1px dashed #edf2f7; background-color: #fafbfe; line-height: 1.7; }
         
+        /* Custom formatting additions inside the panel descriptive details */
+        .description-block { margin-bottom: 25px; }
+        .description-block h4 { color: #1a2e40; font-size: 1.1rem; margin-bottom: 10px; border-left: 3px solid #0d9488; padding-left: 10px; }
+        .description-block ul { list-style-type: dotted; margin-bottom: 15px; padding-left: 20px; }
+        .description-block li { margin-bottom: 8px; }
+        .cta-box { background: #f1f5f9; border-radius: 8px; padding: 15px 20px; border: 1px solid #e2e8f0; margin-top: 15px; }
+        .cta-link { color: #0d9488; font-weight: 600; text-decoration: none; }
+        .cta-link:hover { text-decoration: underline; }
+
         /* Standardized Footer */
         footer { background-color: #1a2e40; color: #94a3b8; text-align: center; padding: 40px 20px; font-size: 0.95rem; border-top: 1px solid #2c4a6f; width: 100%; height: 100px; display: flex; align-items: center; justify-content: center; }
         
         /* Responsive Media Adjustments */
         @media (max-width: 768px) { 
-            /* Fixed Header Mobile Rules */
             header { height: auto; padding: 15px 0; position: relative; } 
             .nav-container { flex-direction: column; gap: 12px; height: auto; } 
-            
-            /* Horizontal row wrap setup for links */
             .nav-links { height: auto; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 4px; } 
             .nav-links li { height: auto; } 
             .nav-links a { font-size: 0.88rem; padding: 6px 10px; }
             .nav-links a::after { display: none; }
             .nav-cta { margin-left: 0; margin-top: 4px; padding: 6px 14px !important; } 
             
-            /* Spacing adjustments */
             .page-header { padding: 40px 15px; }
             .page-header h1 { font-size: 1.8rem; }
             .events-container { margin: 40px auto; }
-            
-            /* Dropdown dynamic adjustments for medium width */
             .event-description { padding-left: 35px; }
             footer { height: auto; padding: 30px 15px; }
         }
         
         @media (max-width: 600px) { 
-            /* Collapse individual event rows neatly into mobile responsive stacked cards */
             .event-summary { flex-direction: column; } 
             .event-date { padding: 15px; width: 100%; min-width: 100%; max-width: 100%; flex-direction: row; gap: 8px; justify-content: center; }
-            .event-date .day { font-size: 1.3rem; }
-            .event-date .month { font-size: 1.3rem; margin-top: 0; text-transform: none; letter-spacing: 0; }
-            .event-date .month::before { content: "- "; } /* Neat automatic spacer dash on mobile layout formats */
+            .event-date .day { font-size: 1.2rem; }
+            .event-date .month { font-size: 1.2rem; margin-top: 0; text-transform: none; letter-spacing: 0; }
+            .event-date .month::before { content: "- "; } 
             
             .event-details { padding: 25px 20px; }
             .dropdown-arrow { top: 32px; transform: none; right: 20px; }
@@ -137,39 +139,97 @@
             <p>Our advocacy actions are live and open to all. Click any event panel below to view more details and descriptions.</p>
             
             <div class="event-list">
-                <!-- Dropdown Event Card 1 (Multi-day date range configuration) -->
+                <!-- Dropdown Event Card: Writing Competition -->
                 <details class="event-row">
                     <summary class="event-summary">
                         <div class="event-date">
-                            <span class="day">12 - 14</span>
-                            <span class="month">July</span>
+                            <span class="day">Jul - Aug</span>
+                            <span class="month">2026</span>
                         </div>
                         <div class="event-details">
-                            <h3>Community Sensory Awareness Seminar</h3>
-                            <div class="event-time">🕒 2:00 PM - 4:30 PM | Town Community Center</div>
+                            <h3>Advocate For Autism's Writing Competition</h3>
+                            <div class="event-time">🕒 01/07/2026 - 01/08/2026 | Online Submission</div>
                         </div>
                         <span class="dropdown-arrow">▼</span>
                     </summary>
                     <div class="event-description">
-                        <p>An interactive discussion outlining standard autism patterns and practical sensory support strategies for businesses and neighborhoods.</p>
-                    </div>
-                </details>
+                        
+                        <div class="description-block">
+                            <h4>Which writing prompt would you like to respond to?</h4>
+                            <ul>
+                                <li><strong>Option 1:</strong> Imagine a society where neurodiversity is understood and supported. What would schools, workplaces, friendships, and public spaces look like?</li>
+                                <li><strong>Option 2:</strong> If you could change any one misconception, barrier, or attitude towards autism, what would you change and why?</li>
+                                <li><strong>Option 3:</strong> Describe the mind of an individual on the autism spectrum.</li>
+                            </ul>
+                        </div>
 
-                <!-- Dropdown Event Card 2 (Standard date structure) -->
-                <details class="event-row">
-                    <summary class="event-summary">
-                        <div class="event-date">
-                            <span class="day">28</span>
-                            <span class="month">Aug</span>
+                        <div class="description-block">
+                            <h4>General Eligibility & Guidelines</h4>
+                            <ul>
+                                <li><strong>No entry fee:</strong> No entry fee is required. Participation in this writing competition is free.</li>
+                                <li><strong>Eligibility:</strong> This competition is open to everyone.</li>
+                                <li><strong>Accepted formats:</strong> Entries may be submitted in any format but must require a title.</li>
+                                <li><strong>One entry per participant:</strong> Each participant is only allowed to submit one entry. Multiple submissions from the same participant may result in disqualification.</li>
+                                <li><strong>Word limit:</strong> Entries must not exceed 750 words. Titles are not included in the word count.</li>
+                                <li><strong>Language:</strong> All entries must be written in English.</li>
+                            </ul>
                         </div>
-                        <div class="event-details">
-                            <h3>Inclusive Family Networking Meetup</h3>
-                            <div class="event-time">🕒 11:00 AM - 1:30 PM | Central Public Park</div>
+
+                        <div class="description-block">
+                            <h4>Content Authenticity & AI Rules</h4>
+                            <ul>
+                                <li><strong>Originality:</strong> All entries must be original works created by the entrant. Plagiarism of any length will result in disqualification.</li>
+                                <li><strong>Artificial Intelligence:</strong> Entries must be written entirely by the entrant and must not be generated, in whole or in part, by Artificial Intelligence. The organisers reserve the right to request clarification from entrants if the authenticity of a submission is in doubt. Any work found to have been generated by AI may be disqualified, and any prize awarded based on that submission may be forfeited.</li>
+                                <li><strong>Appropriate content:</strong> Entries must be suitable for a school/community audience. Submissions containing explicit material, excessive violence, sexual content, profanity, vulgar language, racism, discrimination, hate speech, or offensive content may be rejected or disqualified.</li>
+                            </ul>
                         </div>
-                        <span class="dropdown-arrow">▼</span>
-                    </summary>
-                    <div class="event-description">
-                        <p>A completely casual, safe afternoon structure where local families can connect, share stories, and build neighborhood support networks.</p>
+
+                        <div class="description-block">
+                            <h4>Submission Requirements & Deadlines</h4>
+                            <ul>
+                                <li><strong>Submission method:</strong> Entries must be submitted through this form. Submissions sent through Instagram DM, email, or other unofficial methods will not be accepted unless stated otherwise by the organisers.</li>
+                                <li><strong>Deadline:</strong> Submissions close on 1 August 2026 at 3:59 PM GMT. Late submissions will not be accepted.</li>
+                                <li><strong>Instagram requirement:</strong> After submitting, participants must follow the official AFA instagram account, comment on the competition post and tag three people. The post can be found at the link below.</li>
+                            </ul>
+                        </div>
+
+                        <div class="description-block">
+                            <h4>Judging, Prizes & Distribution</h4>
+                            <ul>
+                                <li><strong>Judging decision:</strong> The judges’ decision is final. The organisers will not enter into discussions or appeals regarding the final results.</li>
+                                <li><strong>Prizes:</strong> Winners will receive cash prizes as follows:
+                                    <ul style="list-style-type: circle; margin-top: 5px; margin-left: 20px;">
+                                        <li><strong>First Place:</strong> 100RM + cert (gold) + feature on website</li>
+                                        <li><strong>Second Place:</strong> 50RM + cert (silver) + feature on website</li>
+                                        <li><strong>Third Place:</strong> 30RM + cert (bronze) + feature on website</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Winner announcement:</strong> Winners will be announced on 15th August through Instagram.</li>
+                                <li><strong>Prize and certificate distribution:</strong> Winners will be contacted via email to receive their cash prizes. All participants will receive certificates by email.</li>
+                            </ul>
+                        </div>
+
+                        <div class="description-block">
+                            <h4>Legal, Privacy & Disqualification Policy</h4>
+                            <ul>
+                                <li><strong>Permission to publish:</strong> By submitting an entry, participants grant the organisers permission to publish their entry and name on the society’s platforms for promotional, educational, or awareness purposes. Credit will be given to the entrant.</li>
+                                <li><strong>Privacy:</strong> Personal information collected through the submission form will only be used for competition administration, judging, prize distribution, and certificate delivery.</li>
+                                <li><strong>Disqualification:</strong> The organizers reserve the right to disqualify any participant who breaches the rules, submits false information, submits inappropriate content, plagiarises, uses AI-generated writing, or behaves in a way that undermines the fairness of the competition.</li>
+                                <li><strong>Agreement to rules:</strong> By submitting an entry, participants confirm that they have read, understood, and agreed to all competition rules.</li>
+                            </ul>
+                        </div>
+
+                        <div class="cta-box">
+                            <p><strong>Ready to Submit?</strong> Please make sure your file aligns perfectly with all parameters listed above before executing submission access portals.</p>
+                            <p style="margin-top: 12px; font-size: 1.05rem;">
+                                📝 <a href="https://docs.google.com/forms/d/e/1FAIpQLSfsjfwVDc6CeDN3ddvNvqoWfhZ1chY7GS95ByzSwEAgZnWxVg/viewform" target="_blank" class="cta-link" style="color: #0d9488; font-weight: 700;">Click Here to Submit Your Entry (Google Forms Link)</a>
+                            </p>
+                            <p style="margin-top: 10px; font-size: 0.95rem;">
+                                📸 <a href="[insert Instagram post link]" target="_blank" class="cta-link">View Official Instagram Post</a>
+                            </p>
+                            <p style="margin-top: 12px; font-size: 0.9rem; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 8px;">Contact inquiries: <a href="mailto:Advocateforautism1@gmail.com" style="color: #0d9488; font-weight: 600;">Advocateforautism1@gmail.com</a></p>
+                        </div>
+
                     </div>
                 </details>
             </div>
